@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface WordDao{
+interface FormulaDao{
     @Query("SELECT * FROM Formula WHERE formulaName in (:wantedName) LIMIT 1")
     fun getFormulaByName(wantedName:String):Formula?
     @Query("SELECT * FROM Formula WHERE formulaId in (:wantedId)")
