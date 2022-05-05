@@ -9,5 +9,14 @@
         android:id="@+id/formulasFragment"
         android:name="com.zarisa.formulaglaze.FormulasFragment"
         android:label="fragment_formulas"
-        tools:layout="@layout/fragment_formulas" />
+        tools:layout="@layout/fragment_formulas" >
+        <action
+            android:id="@+id/action_formulasFragment_to_addOrEditFormuliaFragment"
+            app:destination="@id/addOrEditFormulaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addOrEditFormulaFragment"
+        android:name="com.zarisa.formulaglaze.AddOrEditFormulaFragment"
+        android:label="fragment_add_or_edit_formula"
+        tools:layout="@layout/fragment_add_or_edit_formula" />
 </navigation>
