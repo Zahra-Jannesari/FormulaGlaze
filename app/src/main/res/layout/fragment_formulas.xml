@@ -35,27 +35,35 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:textSize="15sp"
-        android:layout_marginTop="10dp"
         android:id="@+id/textView_counterText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="تعداد فرمول های ثبت شده: "
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView_counter"
         app:layout_constraintTop_toBottomOf="@+id/textField_search" />
 
     <TextView
-        android:textSize="15sp"
         android:id="@+id/textView_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView_counterText"
         app:layout_constraintEnd_toStartOf="@+id/textView_counterText"
         app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView_counterText" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_counterText" />
 </androidx.constraintlayout.widget.ConstraintLayout>
