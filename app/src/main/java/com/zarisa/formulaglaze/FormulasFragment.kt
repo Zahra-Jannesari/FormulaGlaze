@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import com.zarisa.formulaglaze.databinding.FragmentFormulasBinding
 import com.zarisa.formulaglaze.vmodel.MainViewModel
+import java.util.*
 
 
 class FormulasFragment : Fragment() {
@@ -25,6 +27,17 @@ class FormulasFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setObserver()
         adaptRecyclerView()
+        onClicks()
+    }
+
+    private fun onClicks() {
+        binding.editTextSearch.doOnTextChanged { inputText, _, _, _ ->
+            viewModel.filter(inputText.toString().lowercase(Locale.getDefault()))
+        }
+        binding.textFieldSearch.setEndIconOnClickListener {
+        }
+        binding.fabAdd.setOnClickListener {
+        }
     }
 
     private fun adaptRecyclerView() {
