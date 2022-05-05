@@ -14,11 +14,15 @@ interface FormulaDao{
     @Query("SELECT count(*) FROM Formula")
     fun formulaListSize():Int
     @Query("SELECT * From formula")
+    fun getFormulaListLivData():LiveData<List<Formula>>
+    @Query("SELECT * From formula")
     fun getFormulaList():List<Formula>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(formula: Formula)
     @Update
-    fun updateWord(formula: Formula)
+    fun updateFormula(formula: Formula)
     @Delete
-    fun deleteWord(formula: Formula)
+    fun deleteFormula(formula: Formula)
+    @Delete
+    fun deleteAllFormulaList(list:List<Formula>)
 }

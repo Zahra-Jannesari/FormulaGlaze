@@ -19,7 +19,7 @@ class MaterialListConverter {
         var materialStrings = materialListString.split('/')
         for (str in materialStrings) {
             var material = str.split(',')
-            materialList.add(Material(material[0], material[1].toDouble(),material[3]))
+            materialList.add(Material(material[0], material[1].toDouble(),material[2]))
         }
         return materialList
     }
