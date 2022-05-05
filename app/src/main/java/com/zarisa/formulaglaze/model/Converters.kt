@@ -7,8 +7,10 @@ class MaterialListConverter {
     fun stringFromMaterialList(materials: List<Material>): String {
         var materialListString =
             "${materials[0].materialName},${materials[0].materialAmount},${materials[0].materialDescription}"
-        for (i in 1 until materials.size) {
-            materialListString += "/${materials[i].materialName},${materials[i].materialAmount},${materials[i].materialDescription}"
+        if (materials.size>1) {
+            for (i in 1 until materials.size) {
+                materialListString += "/${materials[i].materialName},${materials[i].materialAmount},${materials[i].materialDescription}"
+            }
         }
         return materialListString
     }
