@@ -24,6 +24,12 @@ class FormulasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObserver()
+        adaptRecyclerView()
+    }
+
+    private fun adaptRecyclerView() {
+        viewModel.listForFormulaList()
+        binding.recyclerview.adapter = viewModel.formulaAdapter
     }
 
     private fun setObserver() {
