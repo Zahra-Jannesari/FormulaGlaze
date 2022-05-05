@@ -20,4 +20,15 @@ class FormulasFragment : Fragment() {
         binding= FragmentFormulasBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setObserver()
+    }
+
+    private fun setObserver() {
+        viewModel.formulaCounterLiveData.observe(viewLifecycleOwner) {
+            binding.textViewCounter.text = it?.toString() ?: "0"
+        }
+    }
 }
