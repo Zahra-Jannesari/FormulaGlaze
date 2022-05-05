@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph.xml">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/formulasFragment">
 
+    <fragment
+        android:id="@+id/formulasFragment"
+        android:name="com.zarisa.formulaglaze.FormulasFragment"
+        android:label="fragment_formulas"
+        tools:layout="@layout/fragment_formulas" />
 </navigation>
