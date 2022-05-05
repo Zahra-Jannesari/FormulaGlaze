@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.zarisa.formulaglaze.databinding.FragmentFormulasBinding
 import com.zarisa.formulaglaze.vmodel.MainViewModel
 import java.util.*
@@ -34,9 +35,10 @@ class FormulasFragment : Fragment() {
         binding.editTextSearch.doOnTextChanged { inputText, _, _, _ ->
             viewModel.filter(inputText.toString().lowercase(Locale.getDefault()))
         }
-        binding.textFieldSearch.setEndIconOnClickListener {
-        }
+//        binding.textFieldSearch.setEndIconOnClickListener {
+//        }
         binding.fabAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_formulasFragment_to_addOrEditFormuliaFragment)
         }
     }
 
