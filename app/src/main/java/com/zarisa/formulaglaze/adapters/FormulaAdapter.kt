@@ -31,8 +31,8 @@ class FormulaListAdapter(var onFormulaClick: seeAndEditFormula) :
     }
 
     override fun onBindViewHolder(holder: FormulaListAdapter.Holder, position: Int) {
-        val movie = getItem(position)
-        holder.bind(movie)
+        val formula = getItem(position)
+        holder.bind(formula)
     }
 }
 
