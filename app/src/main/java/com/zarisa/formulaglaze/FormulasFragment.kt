@@ -31,11 +31,12 @@ class FormulasFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setObserver()
+        binding.editTextSearch.setText("")
+        setDefaultObserver()
         adaptRecyclerView()
         onClicks()
     }
-    private fun setObserver() {
+    private fun setDefaultObserver() {
         viewModel.formulaCounterLiveData.observe(viewLifecycleOwner) {
             binding.textViewCounter.text = it?.toString() ?: "0"
         }
@@ -61,9 +62,12 @@ class FormulasFragment : Fragment() {
     private fun filter(text: String) {
         text.let {
             if (it.isNullOrBlank())
-                viewModel.formulaListLiveData.observe(viewLifecycleOwner) {liveList->
-                    formulAdapter.submitList(liveList)}
-            else formulAdapter.submitList(Repository.getSearchMatchList(it))
+                setDefaultObserver()
+            else {
+                var matchesList=Repository.getSearchMatchList(it)
+                formulAdapter.submitList(matchesList)
+                binding.textViewCounter.text=matchesList.size.toString()
+            }
         }
     }
     fun seeFormula(formula: Formula) {
