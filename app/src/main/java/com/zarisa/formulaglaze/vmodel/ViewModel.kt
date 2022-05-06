@@ -27,7 +27,11 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }
 
     }
-    fun submitFormulaList(list:List<Formula>){
+    private fun submitFormulaList(list:List<Formula>){
         formulaAdapter.submitList(list)
+    }
+
+    fun getFormulaById(id: Int): Formula {
+        return Repository.getFormulaById(id)
     }
 }

@@ -33,4 +33,8 @@ object Repository {
     fun getSearchMatchList(text:String):List<Formula>{
         return formulaDao.getMatches(text)
     }
+
+    fun getFormulaById(id: Int): Formula {
+        return formulaDao.getFormulaById(id)
+    }
 }
