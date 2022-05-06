@@ -71,8 +71,8 @@ class FormulasFragment : Fragment() {
         }
     }
     fun seeFormula(formula: Formula) {
-//        val bundle = bundleOf(EDIT to true, FormulaID to formula)
-//        findNavController().navigate(R.id.action_formulasFragment_to_addOrEditFormulaFragment, bundle
-//        )
+        val bundle = bundleOf(EDIT to true, FormulaID to formula.formulaId)
+        findNavController().navigate(R.id.action_formulasFragment_to_addOrEditFormuliaFragment, bundle
+        )
     }
 }
