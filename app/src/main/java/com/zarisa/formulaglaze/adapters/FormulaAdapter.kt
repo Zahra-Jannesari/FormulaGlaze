@@ -11,7 +11,7 @@ import com.zarisa.formulaglaze.databinding.FormulaListItemBinding
 typealias seeAndEditFormula = (Formula) -> Unit
 
 class FormulaListAdapter(var onFormulaClick: seeAndEditFormula) :
-    ListAdapter<Formula, FormulaListAdapter.Holder>(MovieDiffCallback) {
+    ListAdapter<Formula, FormulaListAdapter.Holder>(FormulaDiffCallback) {
     inner class Holder(private val binding: FormulaListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Formula) {
@@ -36,7 +36,7 @@ class FormulaListAdapter(var onFormulaClick: seeAndEditFormula) :
     }
 }
 
-object MovieDiffCallback : DiffUtil.ItemCallback<Formula>() {
+object FormulaDiffCallback : DiffUtil.ItemCallback<Formula>() {
     override fun areItemsTheSame(oldItem: Formula, newItem: Formula): Boolean {
         return oldItem.formulaName == newItem.formulaName
     }
