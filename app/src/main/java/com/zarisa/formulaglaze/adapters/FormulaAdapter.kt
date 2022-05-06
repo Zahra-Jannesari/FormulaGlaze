@@ -13,7 +13,8 @@ class FormulaListAdapter (var onFormulaClick:seeAndEditFormula): ListAdapter<For
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Formula) {
             try {
-                binding.tvFormulaName.text = item.formulaName
+//                binding.tvFormulaName.text = item.formulaName
+                binding.formula=item
                 binding.root.setOnClickListener{onFormulaClick(item)}
             } catch (e: Exception) {
                 e.printStackTrace()
