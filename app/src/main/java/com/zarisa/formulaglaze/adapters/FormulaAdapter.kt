@@ -7,15 +7,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.zarisa.formulaglaze.database.Formula
 import com.zarisa.formulaglaze.databinding.FormulaListItemBinding
-typealias seeAndEditFormula=(Formula)->Unit
-class FormulaListAdapter (var onFormulaClick:seeAndEditFormula): ListAdapter<Formula, FormulaListAdapter.Holder>(MovieDiffCallback) {
+
+typealias seeAndEditFormula = (Formula) -> Unit
+
+class FormulaListAdapter(var onFormulaClick: seeAndEditFormula) :
+    ListAdapter<Formula, FormulaListAdapter.Holder>(MovieDiffCallback) {
     inner class Holder(private val binding: FormulaListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Formula) {
             try {
-//                binding.tvFormulaName.text = item.formulaName
-                binding.formula=item
-                binding.root.setOnClickListener{onFormulaClick(item)}
+                binding.formula = item
+                binding.root.setOnClickListener { onFormulaClick(item) }
             } catch (e: Exception) {
                 e.printStackTrace()
             }

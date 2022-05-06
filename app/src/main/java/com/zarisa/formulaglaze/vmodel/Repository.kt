@@ -27,9 +27,6 @@ object Repository {
             )
         )
     }
-    fun getFormulaList():List<Formula>{
-        return formulaDao.getFormulaList()
-    }
     fun getSearchMatchList(text:String):List<Formula>{
         return formulaDao.getMatches(text)
     }

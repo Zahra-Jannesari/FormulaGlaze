@@ -7,8 +7,6 @@ import androidx.room.*
 interface FormulaDao{
     @Query("SELECT * From Formula Where formulaName LIKE '%' || :text || '%'")
     fun getMatches(text:String):List<Formula>
-    @Query("SELECT * FROM Formula WHERE formulaName in (:wantedName) LIMIT 1")
-    fun getFormulaByName(wantedName:String):Formula?
     @Query("SELECT * FROM Formula WHERE formulaId in (:wantedId)")
     fun getFormulaById(wantedId:Int):Formula
     @Query("SELECT count(*) FROM Formula")
