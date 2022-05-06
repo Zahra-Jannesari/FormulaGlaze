@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <View
+        android:layout_marginTop="10dp"
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="5dp"
@@ -29,7 +30,8 @@
         android:id="@+id/editText_materialName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="32dp"
+        android:minWidth="48dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/materialName"
         app:layout_constraintEnd_toStartOf="@+id/materialName"
         app:layout_constraintHorizontal_bias="1.0"
@@ -41,18 +43,18 @@
         android:id="@+id/amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:text="مقدار ماده: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/materialName" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_materialName" />
 
     <EditText
         android:id="@+id/editText_materialAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="32dp"
+        android:minWidth="48dp"
         app:layout_constraintEnd_toEndOf="@+id/amount"
         app:layout_constraintStart_toStartOf="@+id/amount"
         app:layout_constraintTop_toBottomOf="@+id/amount" />
@@ -73,7 +75,7 @@
         android:id="@+id/editText_materialConvertAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="32dp"
+        android:minWidth="48dp"
         app:layout_constraintEnd_toEndOf="@+id/convertAmount"
         app:layout_constraintStart_toStartOf="@+id/convertAmount"
         app:layout_constraintTop_toBottomOf="@+id/convertAmount" />
