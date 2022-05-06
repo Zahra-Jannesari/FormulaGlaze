@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.zarisa.formulaglaze.database.Formula
 import com.zarisa.formulaglaze.databinding.FragmentFormulasBinding
 import com.zarisa.formulaglaze.vmodel.MainViewModel
 import java.util.*
@@ -38,7 +40,8 @@ class FormulasFragment : Fragment() {
 //        binding.textFieldSearch.setEndIconOnClickListener {
 //        }
         binding.fabAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_formulasFragment_to_addOrEditFormuliaFragment)
+            val bundle = bundleOf(EDIT to false)
+            findNavController().navigate(R.id.action_formulasFragment_to_addOrEditFormuliaFragment,bundle)
         }
     }
 
@@ -51,5 +54,10 @@ class FormulasFragment : Fragment() {
         viewModel.formulaCounterLiveData.observe(viewLifecycleOwner) {
             binding.textViewCounter.text = it?.toString() ?: "0"
         }
+    }
+
+    fun seeFormula(formula:Formula){
+        val bundle = bundleOf(EDIT to true, FormulaID to formula)
+        findNavController().navigate(R.id.action_formulasFragment_to_addOrEditFormuliaFragment,bundle)
     }
 }
