@@ -39,10 +39,10 @@ class FormulasFragment : Fragment() {
         viewModel.formulaCounterLiveData.observe(viewLifecycleOwner) {
             binding.textViewCounter.text = it?.toString() ?: "0"
         }
+        viewModel.formulaListLiveData.observe(viewLifecycleOwner) {formulAdapter.submitList(it)}
     }
     private fun adaptRecyclerView() {
         binding.recyclerview.adapter = formulAdapter
-        submitFormulaList(Repository.getFormulaList())
     }
     private fun onClicks() {
         binding.editTextSearch.doOnTextChanged { inputText, _, _, _ ->
@@ -58,19 +58,17 @@ class FormulasFragment : Fragment() {
             )
         }
     }
-    private fun submitFormulaList(list: List<Formula>) {
-        formulAdapter.submitList(list)
-    }
     private fun filter(text: String) {
         text.let {
             if (it.isNullOrBlank())
-                submitFormulaList(Repository.getFormulaList())
-            else submitFormulaList(Repository.getSearchMatchList(it))
+                viewModel.formulaListLiveData.observe(viewLifecycleOwner) {liveList->
+                    formulAdapter.submitList(liveList)}
+            else formulAdapter.submitList(Repository.getSearchMatchList(it))
         }
     }
     fun seeFormula(formula: Formula) {
 //        val bundle = bundleOf(EDIT to true, FormulaID to formula)
-//        findNavController().navigate(R.id.action_formulasFragment_to_addOrEditFormuliaFragment, bundle
+//        findNavController().navigate(R.id.action_formulasFragment_to_addOrEditFormulaFragment, bundle
 //        )
     }
 }

@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.zarisa.formulaglaze.database.Formula
 import com.zarisa.formulaglaze.databinding.FragmentAddOrEditFormulaBinding
+import com.zarisa.formulaglaze.model.Material
 import com.zarisa.formulaglaze.vmodel.MainViewModel
+import com.zarisa.formulaglaze.vmodel.Repository
+
 const val EDIT="is edit time?"
 const val FormulaID="formulaID"
 class AddOrEditFormulaFragment : Fragment() {
@@ -39,6 +42,15 @@ class AddOrEditFormulaFragment : Fragment() {
     }
 
     private fun onClicks() {
+        binding.btnSaveChange.setOnClickListener {
+            for (i in 10..15)
+            Repository.formulaDao.insert(
+            Formula(
+                i, "blue$i", arrayListOf(
+                    Material("a$i", 1.2+i), Material("a${i+1}", 5.42+i)
+                )
+            )
+        ) }
     }
 
     private fun putDataForEdit() {

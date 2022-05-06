@@ -57,21 +57,21 @@
                 android:padding="10dp">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_delete"
+                    android:id="@+id/btn_newMaterial"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="سطر جدید"
                     android:textColor="?attr/colorSecondaryVariant"
                     android:textSize="20sp"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_edit"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_saveChange"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/btn_edit"
+                    app:layout_constraintTop_toTopOf="@+id/btn_saveChange"
                     app:strokeColor="?attr/colorSecondaryVariant"
                     app:strokeWidth="3dp" />
 
                 <Button
-                    android:id="@+id/btn_edit"
+                    android:id="@+id/btn_saveChange"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ذخیره تغییرات"
@@ -79,7 +79,7 @@
                     android:backgroundTint="?attr/colorSecondaryVariant"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/btn_delete"
+                    app:layout_constraintStart_toEndOf="@+id/btn_newMaterial"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

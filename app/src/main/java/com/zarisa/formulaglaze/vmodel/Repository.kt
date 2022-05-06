@@ -8,7 +8,7 @@ import com.zarisa.formulaglaze.database.FormulaDao
 import com.zarisa.formulaglaze.model.Material
 
 object Repository {
-    private lateinit var formulaDao: FormulaDao
+    lateinit var formulaDao: FormulaDao
     fun initDB(context: Context) {
         formulaDao = AppDatabase.getAppDataBase(context).formulaDao()
     }
@@ -36,5 +36,9 @@ object Repository {
 
     fun getFormulaById(id: Int): Formula {
         return formulaDao.getFormulaById(id)
+    }
+
+    fun getLiveDataListFormula(): LiveData<List<Formula>> {
+        return formulaDao.getFormulaListLivData()
     }
 }
