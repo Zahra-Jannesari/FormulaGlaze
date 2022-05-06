@@ -20,7 +20,7 @@ import java.util.*
 class FormulasFragment : Fragment() {
     lateinit var binding: FragmentFormulasBinding
     private val viewModel: MainViewModel by viewModels()
-    var formulAdapter = FormulaListAdapter()
+    var formulAdapter = FormulaListAdapter(){formula -> seeFormula(formula) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,5 +67,10 @@ class FormulasFragment : Fragment() {
                 submitFormulaList(Repository.getFormulaList())
             else submitFormulaList(Repository.getSearchMatchList(it))
         }
+    }
+    fun seeFormula(formula: Formula) {
+//        val bundle = bundleOf(EDIT to true, FormulaID to formula)
+//        findNavController().navigate(R.id.action_formulasFragment_to_addOrEditFormuliaFragment, bundle
+//        )
     }
 }

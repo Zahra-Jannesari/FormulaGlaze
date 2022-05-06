@@ -76,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="48dp"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="@+id/convertAmount"
         app:layout_constraintStart_toStartOf="@+id/convertAmount"
         app:layout_constraintTop_toBottomOf="@+id/convertAmount" />

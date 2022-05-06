@@ -10,7 +10,7 @@ import com.zarisa.formulaglaze.database.Formula
 import com.zarisa.formulaglaze.databinding.FragmentAddOrEditFormulaBinding
 import com.zarisa.formulaglaze.vmodel.MainViewModel
 const val EDIT="is edit time?"
-const val FormulaID="ID"
+const val FormulaID="formulaID"
 class AddOrEditFormulaFragment : Fragment() {
     lateinit var binding: FragmentAddOrEditFormulaBinding
     private val viewModel: MainViewModel by viewModels()
