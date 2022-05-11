@@ -7,5 +7,5 @@ import com.zarisa.formulaglaze.model.Material
 @Entity
 data class Formula(
     @PrimaryKey var formulaName: String,
-    var formulaMaterials: List<Material>
+    var formulaMaterials: MutableList<Material>
 )
