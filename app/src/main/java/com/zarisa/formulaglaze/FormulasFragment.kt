@@ -20,7 +20,7 @@ import java.util.*
 class FormulasFragment : Fragment() {
     lateinit var binding: FragmentFormulasBinding
     private val viewModel: MainViewModel by viewModels()
-    var formulAdapter = FormulaListAdapter(){formula -> seeFormula(formula) }
+    var formulAdapter = FormulaListAdapter{ formula -> seeFormula(formula) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,43 +36,47 @@ class FormulasFragment : Fragment() {
         adaptRecyclerView()
         onClicks()
     }
+
     private fun setDefaultObserver() {
         viewModel.formulaCounterLiveData.observe(viewLifecycleOwner) {
             binding.textViewCounter.text = it?.toString() ?: "0"
         }
-        viewModel.formulaListLiveData.observe(viewLifecycleOwner) {formulAdapter.submitList(it)}
+        viewModel.formulaListLiveData.observe(viewLifecycleOwner) { formulAdapter.submitList(it) }
     }
+
     private fun adaptRecyclerView() {
         binding.recyclerview.adapter = formulAdapter
     }
+
     private fun onClicks() {
         binding.editTextSearch.doOnTextChanged { inputText, _, _, _ ->
             filter(inputText.toString().lowercase(Locale.getDefault()))
         }
-//        binding.textFieldSearch.setEndIconOnClickListener {
-//        }
         binding.fabAdd.setOnClickListener {
             val bundle = bundleOf(EDIT to false)
             findNavController().navigate(
-                R.id.action_formulasFragment_to_addOrEditFormuliaFragment,
+                R.id.action_formulasFragment_to_addOrEditFormulaFragment,
                 bundle
             )
         }
     }
+
     private fun filter(text: String) {
         text.let {
             if (it.isNullOrBlank())
                 setDefaultObserver()
             else {
-                var matchesList=Repository.getSearchMatchList(it)
+                var matchesList = Repository.getSearchMatchList(it)
                 formulAdapter.submitList(matchesList)
-                binding.textViewCounter.text=matchesList.size.toString()
+                binding.textViewCounter.text = matchesList.size.toString()
             }
         }
     }
+
     fun seeFormula(formula: Formula) {
-        val bundle = bundleOf(EDIT to true, FormulaID to formula.formulaId)
-        findNavController().navigate(R.id.action_formulasFragment_to_addOrEditFormuliaFragment, bundle
+        val bundle = bundleOf(EDIT to true, FormulaNAME to formula.formulaName)
+        findNavController().navigate(
+            R.id.action_formulasFragment_to_addOrEditFormulaFragment, bundle
         )
     }
 }
