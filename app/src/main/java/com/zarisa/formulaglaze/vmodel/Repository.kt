@@ -22,7 +22,8 @@ object Repository {
             formulaDao.insert(
                 Formula(
                     "blue$i", arrayListOf(
-                        Material("a$i", 1.2 + i), Material("a${i + 1}", 5.42 + i)
+                        Material("a$i", 1.2 + i, "$i is good"),
+                        Material("a${i + 1}", 5.42 + i, "$i is good")
                     )
                 )
             )
@@ -38,5 +39,9 @@ object Repository {
 
     fun getLiveDataListFormula(): LiveData<List<Formula>> {
         return formulaDao.getFormulaListLivData()
+    }
+
+    fun formulaMaterialsLiveData(formulaName: String): LiveData<List<Material>> {
+        return formulaDao.getFormulaMaterialsLiveData(formulaName)
     }
 }

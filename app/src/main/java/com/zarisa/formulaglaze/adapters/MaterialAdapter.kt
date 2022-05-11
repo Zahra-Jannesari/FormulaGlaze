@@ -9,21 +9,26 @@ import com.zarisa.formulaglaze.databinding.MaterialItemBinding
 import com.zarisa.formulaglaze.model.Material
 
 
-class MaterialListAdapter: ListAdapter<Material, MaterialListAdapter.MaterialHolder>(MaterialDiffCallback) {
+class MaterialListAdapter :
+    ListAdapter<Material, MaterialListAdapter.MaterialHolder>(MaterialDiffCallback) {
     inner class MaterialHolder(private val binding: MaterialItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Material) {
             try {
-                binding.editTextMaterialName.setText(item.materialName)
-                binding.editTextMaterialAmount.setText(item.materialAmount.toString())
-                binding.editTextMaterialDescription.setText(item.materialDescription)
+                binding.material = item
+//                binding.editTextMaterialName.setText(item.materialName)
+                binding.editTextMaterialAmount.text = item.materialAmount.toString()
+                binding.editTextMaterialDescription.text = item.materialDescription
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MaterialListAdapter.MaterialHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MaterialListAdapter.MaterialHolder {
         val binding =
             MaterialItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MaterialHolder(binding)
