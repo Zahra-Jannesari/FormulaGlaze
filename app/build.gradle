@@ -71,8 +71,4 @@ dependencies {
     implementation("androidx.navigation:navigation-dynamic-features-fragment:2.4.2")
     implementation 'com.google.android.material:material:1.7.0-alpha01'
 
-
-    //material design
-    implementation 'com.google.android.material:material:1.6.0'
-
 }

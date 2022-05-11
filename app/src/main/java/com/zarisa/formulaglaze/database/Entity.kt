@@ -5,5 +5,7 @@ import androidx.room.PrimaryKey
 import com.zarisa.formulaglaze.model.Material
 
 @Entity
-data class Formula(@PrimaryKey(autoGenerate = true) val formulaId:Int,
-var formulaName:String,var formulaMaterials:List<Material>)
+data class Formula(
+    @PrimaryKey var formulaName: String,
+    var formulaMaterials: List<Material>
+)
