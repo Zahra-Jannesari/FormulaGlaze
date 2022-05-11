@@ -18,5 +18,9 @@
         android:id="@+id/addOrEditFormulaFragment"
         android:name="com.zarisa.formulaglaze.AddOrEditFormulaFragment"
         android:label="fragment_add_or_edit_formula"
-        tools:layout="@layout/fragment_add_or_edit_formula" />
+        tools:layout="@layout/fragment_add_or_edit_formula">
+        <action
+            android:id="@+id/action_addOrEditFormulaFragment_to_formulasFragment"
+            app:destination="@id/formulasFragment" />
+    </fragment>
 </navigation>

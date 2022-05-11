@@ -24,7 +24,7 @@ interface FormulaDao {
     fun getFormulaList(): List<Formula>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(vararg formula: Formula)
+    fun insertNewFormula(vararg formula: Formula)
 
     @Update
     fun updateFormula(formula: Formula)

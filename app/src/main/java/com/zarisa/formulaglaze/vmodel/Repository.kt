@@ -19,7 +19,7 @@ object Repository {
 
     fun addTestDate() {
         for (i in 1..5)
-            formulaDao.insert(
+            formulaDao.insertNewFormula(
                 Formula(
                     "blue$i", arrayListOf(
                         Material("a$i", 1 + i), Material("a${i + 1}", 5 + i)
@@ -42,5 +42,9 @@ object Repository {
 
     fun updateFormula(theFormula: Formula) {
         formulaDao.updateFormula(theFormula)
+    }
+
+    fun insertNewFormula(theFormula: Formula) {
+        formulaDao.insertNewFormula(theFormula)
     }
 }
