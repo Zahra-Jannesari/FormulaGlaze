@@ -14,9 +14,9 @@ class MaterialListAdapter: ListAdapter<Material, MaterialListAdapter.MaterialHol
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Material) {
             try {
-                binding.editTextMaterialName.setText(item.materialName)
-                binding.editTextMaterialAmount.setText(item.materialAmount.toString())
-                binding.editTextMaterialDescription.setText(item.materialDescription)
+                binding.editTextMaterialName.text = item.materialName
+                binding.editTextMaterialAmount.text = item.materialAmount.toString()
+//                binding.editTextMaterialDescription.setText(item.materialDescription)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
