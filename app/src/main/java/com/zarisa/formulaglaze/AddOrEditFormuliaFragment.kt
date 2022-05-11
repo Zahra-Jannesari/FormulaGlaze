@@ -7,22 +7,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.zarisa.formulaglaze.adapters.MaterialListAdapter
 import com.zarisa.formulaglaze.adapters.deleteMaterialItem
+import com.zarisa.formulaglaze.adapters.getConvertedAmount
 import com.zarisa.formulaglaze.database.Formula
 import com.zarisa.formulaglaze.databinding.FragmentAddOrEditFormulaBinding
 import com.zarisa.formulaglaze.model.Material
 import com.zarisa.formulaglaze.vmodel.MainViewModel
+import java.util.*
 
 const val EDIT = "is edit time?"
 const val FormulaNAME = "formulaName"
 
 class AddOrEditFormulaFragment : Fragment() {
+    val ratioLiveData = MutableLiveData<Int>()
     lateinit var binding: FragmentAddOrEditFormulaBinding
     private val viewModel: MainViewModel by viewModels()
-    private val materialAdapter = MaterialListAdapter({material->editMaterial(material)},{material -> deleteMaterial(material) })
+    private val materialAdapter = MaterialListAdapter({ material -> editMaterial(material) },
+        { material -> deleteMaterial(material) },
+        { materialAmount -> observeRatioInMaterials(materialAmount) })
     private var theFormula = Formula("", mutableListOf())
     var isEditTime = false
     override fun onCreateView(
@@ -45,6 +52,17 @@ class AddOrEditFormulaFragment : Fragment() {
         onClicks()
     }
 
+    fun observeRatioInMaterials(materialAmount: Int): String {
+        var convertedAmount: String = ""
+        ratioLiveData.observe(viewLifecycleOwner) {
+            var tempAmount = materialAmount * it
+            for (material in theFormula.formulaMaterials)
+                tempAmount / material.materialAmount
+            convertedAmount = tempAmount.toString()
+        }
+        return convertedAmount
+    }
+
     private fun deleteMaterial(material: Material) {
         val builder = AlertDialog.Builder(requireContext(), R.style.rtlDialog)
         builder.apply {
@@ -52,6 +70,7 @@ class AddOrEditFormulaFragment : Fragment() {
             setTitle("حذف ماده")
             setPositiveButton("ادامه") { _, _ ->
                 theFormula.formulaMaterials.remove(material)
+                materialAdapter.submitList(theFormula.formulaMaterials)
             }
             setNegativeButton("توقف") { _, _ ->
             }
@@ -62,7 +81,12 @@ class AddOrEditFormulaFragment : Fragment() {
     private fun editMaterial(material: Material) {
         //add dialog to get the items and ave them
     }
+
     private fun onClicks() {
+        binding.EditTextRatio.doOnTextChanged { inputText, _, _, _ ->
+            ratioLiveData.value =
+                if (!inputText.isNullOrBlank()) Integer.parseInt(inputText.toString()) else 0
+        }
         binding.imageButtonAddNewMaterial.setOnClickListener {
             addNewMaterial()
         }
@@ -99,9 +123,8 @@ class AddOrEditFormulaFragment : Fragment() {
     }
 
     private fun validateData(): Boolean {
-        return (!binding.EditTextNewMaterialName.text.toString()
-            .isNullOrBlank() && !binding.EditTextNewMaterialAmount.text.toString().isNullOrBlank())
-        var isValid = true
+        return (!binding.EditTextNewMaterialName.text.isNullOrBlank() && !binding.EditTextNewMaterialAmount.text.isNullOrBlank())
+
     }
 
     private fun putDataForEdit() {

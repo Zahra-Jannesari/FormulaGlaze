@@ -2,6 +2,7 @@ package com.zarisa.formulaglaze.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,8 +11,9 @@ import com.zarisa.formulaglaze.model.Material
 
 typealias deleteMaterialItem=(material:Material)->Unit
 typealias editMaterialItem=(material:Material)->Unit
+typealias getConvertedAmount=(materialAmount:Int)->String
 
-class MaterialListAdapter(var onEditItemL:editMaterialItem,var onDeleteItem:deleteMaterialItem): ListAdapter<Material, MaterialListAdapter.MaterialHolder>(MaterialDiffCallback) {
+class MaterialListAdapter(var onEditItemL:editMaterialItem,var onDeleteItem:deleteMaterialItem, var convertedAmount:getConvertedAmount): ListAdapter<Material, MaterialListAdapter.MaterialHolder>(MaterialDiffCallback) {
     inner class MaterialHolder(private val binding: MaterialItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Material) {
@@ -20,6 +22,7 @@ class MaterialListAdapter(var onEditItemL:editMaterialItem,var onDeleteItem:dele
                 binding.editTextMaterialAmount.text = item.materialAmount.toString()
                 binding.btnDeleteItem.setOnClickListener { onDeleteItem(item) }
                 binding.btnEditItem.setOnClickListener { onEditItemL(item) }
+                binding.editTextMaterialConvertAmount.text=convertedAmount(item.materialAmount)
 //                binding.editTextMaterialDescription.setText(item.materialDescription)
             } catch (e: Exception) {
                 e.printStackTrace()
