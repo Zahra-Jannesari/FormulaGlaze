@@ -19,4 +19,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     fun getFormulaByName(name: String): Formula {
         return Repository.getFormulaByName(name)
     }
+
+    fun updateFormula(theFormula: Formula) {
+        Repository.updateFormula(theFormula)
+    }
 }

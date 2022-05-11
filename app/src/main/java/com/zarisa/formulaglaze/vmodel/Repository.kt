@@ -22,7 +22,7 @@ object Repository {
             formulaDao.insert(
                 Formula(
                     "blue$i", arrayListOf(
-                        Material("a$i", 1.2 + i), Material("a${i + 1}", 5.42 + i)
+                        Material("a$i", 1 + i), Material("a${i + 1}", 5 + i)
                     )
                 )
             )
@@ -38,5 +38,9 @@ object Repository {
 
     fun getLiveDataListFormula(): LiveData<List<Formula>> {
         return formulaDao.getFormulaListLivData()
+    }
+
+    fun updateFormula(theFormula: Formula) {
+        formulaDao.updateFormula(theFormula)
     }
 }
