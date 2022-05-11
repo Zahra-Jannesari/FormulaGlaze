@@ -7,14 +7,16 @@ import com.zarisa.formulaglaze.database.Formula
 
 class MainViewModel(app: Application) : AndroidViewModel(app) {
     var formulaCounterLiveData: LiveData<Int>
-    var formulaListLiveData:LiveData<List<Formula>>
+    var formulaListLiveData: LiveData<List<Formula>>
+
     init {
         Repository.initDB(app.applicationContext)
-        formulaCounterLiveData=Repository.getCountOfFormulas()
-        formulaListLiveData=Repository.getLiveDataListFormula()
+        formulaCounterLiveData = Repository.getCountOfFormulas()
+        formulaListLiveData = Repository.getLiveDataListFormula()
         Repository.addTestDate()
     }
-    fun getFormulaById(id: Int): Formula {
-        return Repository.getFormulaById(id)
+
+    fun getFormulaByName(name: String): Formula {
+        return Repository.getFormulaByName(name)
     }
 }
