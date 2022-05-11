@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.zarisa.formulaglaze.adapters.MaterialListAdapter
+import com.zarisa.formulaglaze.adapters.deleteMaterialItem
 import com.zarisa.formulaglaze.database.Formula
 import com.zarisa.formulaglaze.databinding.FragmentAddOrEditFormulaBinding
 import com.zarisa.formulaglaze.model.Material
@@ -20,7 +22,7 @@ const val FormulaNAME = "formulaName"
 class AddOrEditFormulaFragment : Fragment() {
     lateinit var binding: FragmentAddOrEditFormulaBinding
     private val viewModel: MainViewModel by viewModels()
-    private val materialAdapter = MaterialListAdapter()
+    private val materialAdapter = MaterialListAdapter({material->editMaterial(material)},{material -> deleteMaterial(material) })
     private var theFormula = Formula("", mutableListOf())
     var isEditTime = false
     override fun onCreateView(
@@ -43,6 +45,23 @@ class AddOrEditFormulaFragment : Fragment() {
         onClicks()
     }
 
+    private fun deleteMaterial(material: Material) {
+        val builder = AlertDialog.Builder(requireContext(), R.style.rtlDialog)
+        builder.apply {
+            setMessage("ماده حذف خواهد شد.")
+            setTitle("حذف ماده")
+            setPositiveButton("ادامه") { _, _ ->
+                theFormula.formulaMaterials.remove(material)
+            }
+            setNegativeButton("توقف") { _, _ ->
+            }
+        }
+        builder.create().show()
+    }
+
+    private fun editMaterial(material: Material) {
+        //add dialog to get the items and ave them
+    }
     private fun onClicks() {
         binding.imageButtonAddNewMaterial.setOnClickListener {
             addNewMaterial()

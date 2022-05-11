@@ -8,14 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zarisa.formulaglaze.databinding.MaterialItemBinding
 import com.zarisa.formulaglaze.model.Material
 
+typealias deleteMaterialItem=(material:Material)->Unit
+typealias editMaterialItem=(material:Material)->Unit
 
-class MaterialListAdapter: ListAdapter<Material, MaterialListAdapter.MaterialHolder>(MaterialDiffCallback) {
+class MaterialListAdapter(var onEditItemL:editMaterialItem,var onDeleteItem:deleteMaterialItem): ListAdapter<Material, MaterialListAdapter.MaterialHolder>(MaterialDiffCallback) {
     inner class MaterialHolder(private val binding: MaterialItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Material) {
             try {
                 binding.editTextMaterialName.text = item.materialName
                 binding.editTextMaterialAmount.text = item.materialAmount.toString()
+                binding.btnDeleteItem.setOnClickListener { onDeleteItem(item) }
+                binding.btnEditItem.setOnClickListener { onEditItemL(item) }
 //                binding.editTextMaterialDescription.setText(item.materialDescription)
             } catch (e: Exception) {
                 e.printStackTrace()

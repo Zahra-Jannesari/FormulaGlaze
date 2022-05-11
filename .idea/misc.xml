@@ -4,13 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/FIX4U.IR/FormulaGlaze/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.2" />
+        <entry key="..\:/Users/FIX4U.IR/FormulaGlaze/app/src/main/res/drawable/ic_baseline_delete_material_24.xml" value="0.2" />
+        <entry key="..\:/Users/FIX4U.IR/FormulaGlaze/app/src/main/res/drawable/ic_baseline_edit_note_24.xml" value="0.2" />
         <entry key="..\:/Users/FIX4U.IR/FormulaGlaze/app/src/main/res/drawable/ic_baseline_playlist_add_check_24.xml" value="0.1955" />
         <entry key="..\:/Users/FIX4U.IR/FormulaGlaze/app/src/main/res/layout/activity_main.xml" value="0.1921875" />
         <entry key="..\:/Users/FIX4U.IR/FormulaGlaze/app/src/main/res/layout/formula_list_item.xml" value="0.28651685393258425" />
         <entry key="..\:/Users/FIX4U.IR/FormulaGlaze/app/src/main/res/layout/fragment_add_or_edit_formula.xml" value="0.33" />
         <entry key="..\:/Users/FIX4U.IR/FormulaGlaze/app/src/main/res/layout/fragment_add_or_edit_formulia.xml" value="0.178125" />
         <entry key="..\:/Users/FIX4U.IR/FormulaGlaze/app/src/main/res/layout/fragment_formulas.xml" value="0.22" />
-        <entry key="..\:/Users/FIX4U.IR/FormulaGlaze/app/src/main/res/layout/material_item.xml" value="0.18529411764705883" />
+        <entry key="..\:/Users/FIX4U.IR/FormulaGlaze/app/src/main/res/layout/material_item.xml" value="0.33" />
       </map>
     </option>
   </component>
