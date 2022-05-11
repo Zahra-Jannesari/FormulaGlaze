@@ -6,10 +6,10 @@ class MaterialListConverter {
     @TypeConverter
     fun stringFromMaterialList(materials: List<Material>): String {
         var materialListString =
-            "${materials[0].materialName},${materials[0].materialAmount},${materials[0].materialDescription}"
-        if (materials.size>1) {
+            "${materials[0].materialName},${materials[0].materialAmount}"
+        if (materials.size > 1) {
             for (i in 1 until materials.size) {
-                materialListString += "/${materials[i].materialName},${materials[i].materialAmount},${materials[i].materialDescription}"
+                materialListString += "/${materials[i].materialName},${materials[i].materialAmount}"
             }
         }
         return materialListString
@@ -21,7 +21,7 @@ class MaterialListConverter {
         var materialStrings = materialListString.split('/')
         for (str in materialStrings) {
             var material = str.split(',')
-            materialList.add(Material(material[0], material[1].toDouble(),material[2]))
+            materialList.add(Material(material[0], material[1].toInt()))
         }
         return materialList
     }
