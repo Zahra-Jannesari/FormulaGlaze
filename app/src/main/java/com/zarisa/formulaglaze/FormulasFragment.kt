@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
@@ -20,7 +21,25 @@ import java.util.*
 class FormulasFragment : Fragment() {
     lateinit var binding: FragmentFormulasBinding
     private val viewModel: MainViewModel by viewModels()
-    var formulAdapter = FormulaListAdapter{ formula -> seeFormula(formula) }
+    var formulAdapter = FormulaListAdapter({ formula -> seeFormula(formula) },
+        { formula -> deleteFormula(formula) })
+
+    private fun deleteFormula(formula: Formula) {
+        val builder = AlertDialog.Builder(requireContext(), R.style.rtlDialog)
+        builder.apply {
+//            View.LAYOUT_DIRECTION_RTL
+//            setLayoutDirection(View.LAYOUT_DIRECTION_RTL)
+            setMessage("تمامی اطلاعات این فرمول حذف خواهد شد.")
+            setTitle("حذف فرمول")
+            setPositiveButton("ادامه") { _, _ ->
+                viewModel.deleteFormula(formula)
+            }
+            setNegativeButton("توقف") { _, _ ->
+            }
+        }
+        builder.create().show()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

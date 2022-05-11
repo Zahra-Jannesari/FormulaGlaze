@@ -9,8 +9,12 @@ import com.zarisa.formulaglaze.database.Formula
 import com.zarisa.formulaglaze.databinding.FormulaListItemBinding
 
 typealias seeAndEditFormula = (Formula) -> Unit
+typealias deleteTheFormula = (Formula) -> Unit
 
-class FormulaListAdapter(var onFormulaClick: seeAndEditFormula) :
+class FormulaListAdapter(
+    var onFormulaClick: seeAndEditFormula,
+    var onDeleteFormula: deleteTheFormula
+) :
     ListAdapter<Formula, FormulaListAdapter.Holder>(FormulaDiffCallback) {
     inner class Holder(private val binding: FormulaListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -18,6 +22,7 @@ class FormulaListAdapter(var onFormulaClick: seeAndEditFormula) :
             try {
                 binding.formula = item
                 binding.root.setOnClickListener { onFormulaClick(item) }
+                binding.btnDeleteFormula.setOnClickListener { onDeleteFormula(item) }
             } catch (e: Exception) {
                 e.printStackTrace()
             }

@@ -47,4 +47,8 @@ object Repository {
     fun insertNewFormula(theFormula: Formula) {
         formulaDao.insertNewFormula(theFormula)
     }
+
+    fun deleteFormula(formula: Formula) {
+        formulaDao.deleteFormula(formula)
+    }
 }

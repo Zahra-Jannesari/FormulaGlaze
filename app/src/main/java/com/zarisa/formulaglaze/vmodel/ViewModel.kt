@@ -27,4 +27,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     fun insertNewFormula(theFormula: Formula) {
         Repository.insertNewFormula(theFormula)
     }
+
+    fun deleteFormula(formula: Formula) {
+        Repository.deleteFormula(formula)
+    }
 }
