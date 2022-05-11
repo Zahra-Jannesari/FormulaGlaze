@@ -9,9 +9,9 @@
         android:id="@+id/formulasFragment"
         android:name="com.zarisa.formulaglaze.FormulasFragment"
         android:label="fragment_formulas"
-        tools:layout="@layout/fragment_formulas" >
+        tools:layout="@layout/fragment_formulas">
         <action
-            android:id="@+id/action_formulasFragment_to_addOrEditFormuliaFragment"
+            android:id="@+id/action_formulasFragment_to_addOrEditFormulaFragment"
             app:destination="@id/addOrEditFormulaFragment" />
     </fragment>
     <fragment
