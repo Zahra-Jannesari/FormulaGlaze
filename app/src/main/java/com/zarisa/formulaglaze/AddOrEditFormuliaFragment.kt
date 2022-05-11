@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.zarisa.formulaglaze.adapters.MaterialListAdapter
 import com.zarisa.formulaglaze.database.Formula
 import com.zarisa.formulaglaze.databinding.FragmentAddOrEditFormulaBinding
+import com.zarisa.formulaglaze.model.Material
 import com.zarisa.formulaglaze.vmodel.MainViewModel
 
 const val EDIT = "is edit time?"
@@ -37,8 +39,33 @@ class AddOrEditFormulaFragment : Fragment() {
     }
 
     private fun onClicks() {
+        binding.imageButtonAddNewMaterial.setOnClickListener {
+            addNewMaterial()
+        }
         binding.btnSaveChange.setOnClickListener {
         }
+    }
+
+    private fun addNewMaterial() {
+        if (validateData()) {
+            theFormula.formulaMaterials.add(
+                Material(
+                    binding.EditTextNewMaterialName.text.toString(),
+                    Integer.parseInt(binding.EditTextNewMaterialAmount.text.toString())
+                )
+            )
+            viewModel.updateFormula(theFormula)
+            binding.EditTextNewMaterialName.setText("")
+            binding.EditTextNewMaterialAmount.setText("")
+            materialAdapter.submitList(theFormula.formulaMaterials)
+        } else
+            Toast.makeText(requireContext(), "data not valid.", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun validateData(): Boolean {
+        return (!binding.EditTextNewMaterialName.text.toString()
+            .isNullOrBlank() && !binding.EditTextNewMaterialAmount.text.toString().isNullOrBlank())
+        var isValid = true
     }
 
     private fun putDataForEdit() {
