@@ -110,10 +110,10 @@ class AddOrEditFormulaFragment : Fragment() {
             theFormula.formulaMaterials.add(
                 Material(
                     binding.EditTextNewMaterialName.text.toString(),
-                    Integer.parseInt(binding.EditTextNewMaterialAmount.text.toString()),
-                    Integer.parseInt(binding.EditTextNewMaterialAmount.text.toString()).toDouble()
+                    Integer.parseInt(binding.EditTextNewMaterialAmount.text.toString())
                 )
             )
+            setNewData()
             binding.EditTextNewMaterialName.setText("")
             binding.EditTextNewMaterialAmount.setText("")
         } else
