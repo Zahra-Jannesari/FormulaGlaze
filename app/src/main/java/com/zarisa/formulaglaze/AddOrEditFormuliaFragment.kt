@@ -24,12 +24,10 @@ const val EDIT = "is edit time?"
 const val FormulaNAME = "formulaName"
 
 class AddOrEditFormulaFragment : Fragment() {
-    val ratioLiveData = MutableLiveData<Int>()
     lateinit var binding: FragmentAddOrEditFormulaBinding
     private val viewModel: MainViewModel by viewModels()
     private val materialAdapter = MaterialListAdapter({ material -> editMaterial(material) },
-        { material -> deleteMaterial(material) },
-        { materialAmount -> observeRatioInMaterials(materialAmount) })
+        { material -> deleteMaterial(material) })
     private var theFormula = Formula("", mutableListOf())
     var isEditTime = false
     override fun onCreateView(
@@ -52,25 +50,14 @@ class AddOrEditFormulaFragment : Fragment() {
         onClicks()
     }
 
-    fun observeRatioInMaterials(materialAmount: Int): String {
-        var convertedAmount: String = ""
-        ratioLiveData.observe(viewLifecycleOwner) {
-            var tempAmount = materialAmount * it
-            for (material in theFormula.formulaMaterials)
-                tempAmount / material.materialAmount
-            convertedAmount = tempAmount.toString()
-        }
-        return convertedAmount
-    }
-
     private fun deleteMaterial(material: Material) {
-        val builder = AlertDialog.Builder(requireContext(), R.style.rtlDialog)
+        val builder = AlertDialog.Builder(requireContext())
         builder.apply {
             setMessage("ماده حذف خواهد شد.")
             setTitle("حذف ماده")
             setPositiveButton("ادامه") { _, _ ->
                 theFormula.formulaMaterials.remove(material)
-                materialAdapter.submitList(theFormula.formulaMaterials)
+                setNewData()
             }
             setNegativeButton("توقف") { _, _ ->
             }
@@ -84,8 +71,15 @@ class AddOrEditFormulaFragment : Fragment() {
 
     private fun onClicks() {
         binding.EditTextRatio.doOnTextChanged { inputText, _, _, _ ->
-            ratioLiveData.value =
-                if (!inputText.isNullOrBlank()) Integer.parseInt(inputText.toString()) else 0
+            if (!inputText.isNullOrBlank()) {
+                for (i in theFormula.formulaMaterials) {
+                    var tempAmount = i.materialAmount * inputText.toString().toDouble()
+                    for (material in theFormula.formulaMaterials)
+                        tempAmount /= material.materialAmount
+                    i.convertedAmount = tempAmount
+                    setNewData()
+                }
+            }
         }
         binding.imageButtonAddNewMaterial.setOnClickListener {
             addNewMaterial()
@@ -106,15 +100,20 @@ class AddOrEditFormulaFragment : Fragment() {
         }
     }
 
+    private fun setNewData() {
+        materialAdapter.submitList(theFormula.formulaMaterials)
+        materialAdapter.notifyDataSetChanged()
+    }
+
     private fun addNewMaterial() {
         if (validateData()) {
             theFormula.formulaMaterials.add(
                 Material(
                     binding.EditTextNewMaterialName.text.toString(),
-                    Integer.parseInt(binding.EditTextNewMaterialAmount.text.toString())
+                    Integer.parseInt(binding.EditTextNewMaterialAmount.text.toString()),
+                    Integer.parseInt(binding.EditTextNewMaterialAmount.text.toString()).toDouble()
                 )
             )
-//            viewModel.updateFormula(theFormula)
             binding.EditTextNewMaterialName.setText("")
             binding.EditTextNewMaterialAmount.setText("")
         } else

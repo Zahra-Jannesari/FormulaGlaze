@@ -25,7 +25,7 @@ class FormulasFragment : Fragment() {
         { formula -> deleteFormula(formula) })
 
     private fun deleteFormula(formula: Formula) {
-        val builder = AlertDialog.Builder(requireContext(), R.style.rtlDialog)
+        val builder = AlertDialog.Builder(requireContext())
         builder.apply {
 //            View.LAYOUT_DIRECTION_RTL
 //            setLayoutDirection(View.LAYOUT_DIRECTION_RTL)
